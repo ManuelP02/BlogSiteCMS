@@ -19,6 +19,7 @@ Post.init({
         type: DataTypes.STRING,
         allowNull: false
     },
+    //FK user model
     userId: {  
         type: DataTypes.INTEGER,
         references: {

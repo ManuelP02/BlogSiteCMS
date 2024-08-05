@@ -1,0 +1,47 @@
+<head>
+    <title>Fancy Blog Site - Home</title>
+</head>
+<body>
+<div class="container mt-4">
+        {{#if posts.length}}
+            {{#each posts}}
+                <div class="card mb-3">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="card-title mb-0">{{title}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{description}}</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                Posted by {{user.username}} on {{formatDate createdAt}}
+                            </small>
+                        </p>
+                        
+                        <!-- Comments Section -->
+                        <div class="comments-section mt-3">
+                            <h6>Comments:</h6>
+                            <div id="comments-{{id}}">
+                                {{#each comments}}
+                                    <div class="comment mb-2">
+                                        {{content}} -By <strong>{{user.username}}:</strong> - <strong>On</strong> {{formatDate createdAt}}
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+
+                        <!-- Comment Form -->
+                        <form id="comment-form" class="comment-form mt-3" data-post-id="{{id}}">
+    <div class="mb-3">
+        <textarea class="form-control comment-text" rows="2" placeholder="Add a comment..." required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm">Submit Comment</button>
+</form>
+                    </div>
+                </div>
+            {{/each}}
+        {{else}}
+            <p class="text-center">No posts found.</p>
+        {{/if}}
+    </div>
+ <script src="/js/comment.js"></script>
+</body>

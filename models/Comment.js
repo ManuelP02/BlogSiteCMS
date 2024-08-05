@@ -14,6 +14,7 @@ Comment.init({
         type: DataTypes.STRING,
         allowNull: false
     },
+    //FK userId
     userId: {  
         type: DataTypes.INTEGER,
         references: {
@@ -21,6 +22,7 @@ Comment.init({
           key: 'id',
         },
       },
+      //FK postId
       postId: { 
         type: DataTypes.INTEGER,
         references: {
