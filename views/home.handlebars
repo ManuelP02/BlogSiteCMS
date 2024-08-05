@@ -6,24 +6,25 @@
         {{#if posts.length}}
             {{#each posts}}
                 <div class="card mb-3">
-                    <div class="card-header bg-dark text-white">
-                        <h5 class="card-title mb-0">{{title}}</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">{{description}}</p>
-                        <p class="card-text">
-                            <small class="text-muted">
-                                Posted by {{user.username}} on {{formatDate createdAt}}
-                            </small>
-                        </p>
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">{{title}}</h5>
+        <small class="text-white-50">
+            Posted by {{user.username}} on {{formatDate createdAt}}
+        </small>
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{description}}</p>
+
+
                         
                         <!-- Comments Section -->
                         <div class="comments-section mt-3">
+                            <br><br>
                             <h6>Comments:</h6>
                             <div id="comments-{{id}}">
                                 {{#each comments}}
                                     <div class="comment mb-2">
-                                        {{content}} -By <strong>{{user.username}}:</strong> - <strong>On</strong> {{formatDate createdAt}}
+                                        {{content}} -By <strong>{{user.username}}</strong> - <strong>On</strong> {{formatDate createdAt}}
                                     </div>
                                 {{/each}}
                             </div>
@@ -40,7 +41,7 @@
                 </div>
             {{/each}}
         {{else}}
-            <p class="text-center">No posts found.</p>
+            <p class="text-center">No contributions have been made yet.</p>
         {{/if}}
     </div>
  <script src="/js/comment.js"></script>

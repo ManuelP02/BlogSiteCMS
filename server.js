@@ -17,7 +17,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: { 
-        secure: false, // Use secure cookies in production
+        secure: false,
         maxAge: 24 * 60 * 60 * 1000 // 24 hours
     },
     store: new SequelizeStore({
@@ -53,18 +53,12 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files
+// Server static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Data parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Development mode middleware
-app.use((req, res, next) => {
-    res.locals.DEV_MODE = process.env.NODE_ENV !== 'production';
-    next();
-});
 
 // Routes
 app.use(routes);
@@ -75,11 +69,8 @@ app.get('/', isLoggedOut, (req, res) => {
 });
 
 // Sync Sequelize and start the server
-sequelize.query('TRUNCATE TABLE "Sessions"').then(() => {
-    console.log('Sessions table truncated');
     sequelize.sync({ force: false }).then(() => {
         app.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
         });
     });
-});

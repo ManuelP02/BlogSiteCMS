@@ -19,7 +19,6 @@ router.get('/login', (req, res) => {
 
 //Signup post route
 router.post('/signup', async (req, res) => {
-  console.log(req.body);
   try {
     // Check if username already exists
     const existingUser = await User.findOne({ where: { username: req.body.username } });
@@ -78,14 +77,13 @@ router.post('/login', async (req, res) => {
           console.error('Session save error:', err);
           reject(err);
         } else {
-          console.log('Session saved successfully:', req.session);
           resolve();
         }
       });
     });
 
     const { password: _, ...userWithoutPassword } = dbUserData.get({ plain: true });
-    res.status(200).json({ user: userWithoutPassword, message: 'You are now logged in!', redirectUrl: '/home' });
+    res.status(200).json({ user: userWithoutPassword, message: 'Sign in successful!', redirectUrl: '/home' });
   } catch (err) {
     console.error('Login error:', err);
     res.status(500).json({ message: 'An error occurred during login', error: err.message });
